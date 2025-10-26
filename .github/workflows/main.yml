@@ -23,7 +23,8 @@ jobs:
 
       - name: Install build dependencies
         run: |
-          DEBIAN_FRONTEND=noninteractive sudo apt-get install -y gcc-aarch64-linux-gnu lld
+          sudo apt remove -y needrestart
+          sudo apt-get install -y gcc-aarch64-linux-gnu lld
 
       - name: Clone techpack
         working-directory: kernel
