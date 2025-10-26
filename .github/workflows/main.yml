@@ -6,7 +6,7 @@ on:
 env:
   DEFCONFIG: defconfig
   ARCH: arm64
-  ODIR: out
+  TECHPACK_REPO: https://github.com/mohamedkam000/android_kernel_xiaomi_5.10-modules.git
   ANYKERNEL_REPO: https://github.com/osm0sis/AnyKernel3.git
   ANYKERNEL_DIR: anykernel3
   ZIP_NAME: 5.10_kernel.zip
@@ -25,10 +25,15 @@ jobs:
         run: |
           DEBIAN_FRONTEND=noninteractive sudo apt-get install -y gcc-aarch64-linux-gnu lld
 
-    #  - name: Implement KSU Next
-    #    working-directory: kernel
-    #    run: |
-    #      curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
+      - name: Clone techpack
+        working-directory: kernel
+        run: |
+          git clone --depth 1 $TECHPACK_REPO techpack
+
+      - name: Implement KSU Next
+        working-directory: kernel
+        run: |
+          curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
 
       - name: Build Image
         working-directory: kernel
