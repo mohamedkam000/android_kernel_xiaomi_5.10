@@ -50,27 +50,27 @@ jobs:
           make $DEFCONFIG
           make -j24
 
-     # - name: Clone AnyKernel3
-     #   working-directory: kernel
-     #   run: |
-     #     git clone --depth=1 $ANYKERNEL_REPO $ANYKERNEL_DIR
+      - name: Clone AnyKernel3
+        working-directory: kernel
+        run: |
+          git clone --depth=1 $ANYKERNEL_REPO $ANYKERNEL_DIR
 
-     # - name: Copy kernel image to AnyKernel3
-     #   working-directory: kernel
-     #   run: |
-     #     cp arch/arm64/boot/Image $ANYKERNEL_DIR
+      - name: Copy kernel image to AnyKernel3
+        working-directory: kernel
+        run: |
+          cp arch/arm64/boot/Image $ANYKERNEL_DIR
 
-    #  - name: Create flashable AnyKernel3 zip
-    #    working-directory: kernel
-    #    run: |
-    #      cd $ANYKERNEL_DIR
-    #      rm -rf .git || true
-    #      zip -r "../$ZIP_NAME" . -x "*.git*" || true
-    #      cd ..
-    #      ls -la $ZIP_NAME
+      - name: Create flashable AnyKernel3 zip
+        working-directory: kernel
+        run: |
+          cd $ANYKERNEL_DIR
+          rm -rf .git || true
+          zip -r "../$ZIP_NAME" . -x "*.git*" || true
+          cd ..
+          ls -la $ZIP_NAME
 
-     # - name: Upload the kernel
-     #   uses: actions/upload-artifact@v4.6.2
-     #   with:
-     #     name: odin_kernel
-     #     path: kernel/anykernel3
+      - name: Upload the kernel
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: 5.10_kernel
+          path: kernel/anykernel3
